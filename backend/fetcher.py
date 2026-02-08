@@ -22,7 +22,7 @@ def fetch_weather_data(latitude: float, longitude: float, start_date: str, end_d
     df = pandas.DataFrame(data)
     return df
 
-def get_geolocation(city: str) -> tuple(float, float):
+def get_geolocation(city: str) -> float:
     api = 'd63617f55a6b5a78d09e85ccc2c6d494'
     api_call = f'http://api.openweathermap.org/geo/1.0/direct?q={city}&limit=5&appid={api}'
     
