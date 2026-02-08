@@ -1,9 +1,9 @@
-import pandas as pd
+import pandas
 import requests
 import datetime
 from calendar import monthrange, isleap
 
-def fetch_weather_data(latitude, longitude, start_date, end_date):
+def fetch_weather_data(latitude: float, longitude: float, start_date: str, end_date: str) -> pandas.DataFrame:
     """
     Получает исторические данные о погоде с Open-Meteo API.
     """
@@ -19,10 +19,10 @@ def fetch_weather_data(latitude, longitude, start_date, end_date):
     }
     response = requests.get(url, params=params)
     data = response.json()
-    df = pd.DataFrame(data)
+    df = pandas.DataFrame(data)
     return df
 
-def get_geolocation(city):
+def get_geolocation(city: str) -> tuple(float, float):
     api = 'd63617f55a6b5a78d09e85ccc2c6d494'
     api_call = f'http://api.openweathermap.org/geo/1.0/direct?q={city}&limit=5&appid={api}'
     
@@ -36,12 +36,12 @@ def get_geolocation(city):
     
     return latitude, longitude
 
-def fetch_daily(city_name, date: datetime.datetime):
+def fetch_daily(city_name: str, date: datetime.datetime) -> pandas.DataFrame:
     lat, lon = get_geolocation(city_name)
     date_string = date.strftime("%Y-%m-%d")
     return fetch_weather_data(lat, lon, date_string, date_string)['daily']
 
-def fetch_monthly(city_name, begin_date: datetime.datetime):
+def fetch_monthly(city_name: str, begin_date: datetime.datetime) -> pandas.DataFrame:
     #ВНИМАНИЕ: в begin_date должна быть указана дата с ПЕРВЫМ ЧИСЛОМ данного месяца
     lat, lon = get_geolocation(city_name)
 
@@ -57,7 +57,7 @@ def fetch_monthly(city_name, begin_date: datetime.datetime):
     df = fetch_weather_data(lat, lon, begin_date_str, end_date_str)['daily']
     return df
 
-def fetch_yearly(city_name, begin_date: datetime.datetime):
+def fetch_yearly(city_name: str, begin_date: datetime.datetime) -> pandas.DataFrame:
     #ВНИМАНИЕ: в begin_date должна быть указана дата с ПЕРВЫМ ДНЁМ данного года
     lat, lon = get_geolocation(city_name)
 
