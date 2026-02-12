@@ -39,7 +39,8 @@ def get_geolocation(city: str) -> float:
 def fetch_daily(city_name: str, date: datetime.datetime) -> pandas.DataFrame:
     lat, lon = get_geolocation(city_name)
     date_string = date.strftime("%Y-%m-%d")
-    return fetch_weather_data(lat, lon, date_string, date_string)['daily']
+    data = fetch_weather_data(lat, lon, date_string, date_string)['daily']
+    return data
 
 def fetch_monthly(city_name: str, begin_date: datetime.datetime) -> pandas.DataFrame:
     #ВНИМАНИЕ: в begin_date должна быть указана дата с ПЕРВЫМ ЧИСЛОМ данного месяца
