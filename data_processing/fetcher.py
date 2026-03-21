@@ -4,9 +4,6 @@ import datetime
 from calendar import monthrange, isleap
 
 def fetch_weather_data(latitude: float, longitude: float, start_date: str, end_date: str) -> pandas.DataFrame:
-    """
-    Получает исторические данные о погоде с Open-Meteo API.
-    """
     url = "https://archive-api.open-meteo.com/v1/archive"
     params = {
         "latitude": latitude,
@@ -79,3 +76,4 @@ def fetch_yearly(city_name: str, begin_date: datetime.datetime) -> pandas.DataFr
 #print(fetch_daily('Moscow', datetime.datetime.strptime('2023-01-01', '%Y-%m-%d')))
 #print(fetch_monthly('Moscow', datetime.datetime.strptime('2023-01-01', '%Y-%m-%d')))
 #print(fetch_yearly('Moscow', datetime.datetime.strptime('2023-01-01', '%Y-%m-%d')))
+# print(get_geolocation('Moscow'))

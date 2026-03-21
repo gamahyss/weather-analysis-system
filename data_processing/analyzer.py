@@ -16,8 +16,7 @@ def analyze_monthly(city_name: str, date: datetime.datetime) -> pandas.DataFrame
     daily_prec = pandas.DataFrame({'prec': data['precipitation_sum']})
     daily_wind_speed = pandas.DataFrame({'wind_speed': data['wind_speed_10m_max']})
 
-    average_values = pandas.DataFrame({'avrg_temp_max': [numpy.mean(data['temperature_2m_max'])],
-                           'avrg_temp_min': [numpy.mean(data['temperature_2m_min'])],
+    average_values = pandas.DataFrame({'avrg_temp': numpy.mean([numpy.mean(data['temperature_2m_max']), numpy.mean(data['temperature_2m_min'])]),
                            'avrg_prec': [numpy.mean(data['precipitation_sum'])],
                            'avrg_wind_speed': [numpy.mean(data['wind_speed_10m_max'])]
                            })
